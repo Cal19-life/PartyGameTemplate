@@ -24,14 +24,12 @@ public class wasd_movement : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
-        Debug.Log("Player 2 Wins!");
-
         StopAllCoroutines();
         if (collision.gameObject.tag == "SpeedSquare") {
             StartCoroutine(TempSpeedBuff(statusTimeInSeconds));
         } else if (collision.gameObject.tag == "SlowSquare") {
             StartCoroutine(TempSlowDebuff(statusTimeInSeconds));
-        } else if (collision.gameObject.tag == "End") {
+        } else if (collision.gameObject.tag == "Finish") {
             Debug.Log("Player 2 Wins!");
             //TODO: Delete this and instead go back to the board
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -42,12 +40,14 @@ public class wasd_movement : MonoBehaviour
         currentSpeed = fastSpeed;
         yield return new WaitForSeconds(waitTime);
         currentSpeed = neutralSpeed;
+        //Debug.Log("currentSpeed = " + currentSpeed);
     }
 
     IEnumerator TempSlowDebuff(float waitTime) {
         currentSpeed = slowSpeed;
         yield return new WaitForSeconds(waitTime);
         currentSpeed = neutralSpeed;
+        //Debug.Log("currentSpeed = " + currentSpeed);
     }
 
     // Update is called once per frame
